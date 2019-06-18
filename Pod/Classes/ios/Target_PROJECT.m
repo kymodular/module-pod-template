@@ -14,7 +14,7 @@
 - (UIViewController *)Action_viewController:(NSDictionary *)params
 {
     NSString *contentText = params[@"contentText"];
-    BViewController *viewController = [[BViewController alloc] initWithContentText:contentText];
+    CPDViewController *viewController = [[CPDViewController alloc] initWithContentText:contentText];
     return viewController;
 }
     
