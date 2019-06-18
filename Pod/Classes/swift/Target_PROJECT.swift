@@ -12,6 +12,6 @@ import UIKit
     @objc func Action_viewController(_ params:NSDictionary) -> UIViewController {
         let contentText = params["contentText"];
         
-        return ViewController.init;
+        return ViewController();
     }
 }
