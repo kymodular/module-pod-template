@@ -40,6 +40,8 @@ module Pod
           end
       end
 
+      `mv ./Pod/Classes/swift/* ./Pod/Classes/`
+      
       Pod::ProjectManipulator.new({
         :configurator => @configurator,
         :xcodeproj_path => "templates/swift/Example/PROJECT.xcodeproj",
@@ -50,7 +52,6 @@ module Pod
       }).run
 
       `mv ./templates/swift/* ./`
-      `mv ./Pod/Classes/swift/* ./Pod/Classes/`
 
       # There has to be a single file in the Classes dir
       # or a framework won't be created
@@ -63,7 +64,6 @@ module Pod
 
       # remove podspec for osx
       `rm ./NAME-osx.podspec`
-      `rm -rf ./Pod/Classes/ios`
     end
   end
 

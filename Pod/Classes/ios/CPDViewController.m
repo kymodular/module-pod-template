@@ -1,21 +1,21 @@
 //
-//  BViewController.m
+//  CPDViewController.m
 //  PROJECT
 //
 //  Created by PROJECT_OWNER on TODAYS_DATE.
 //  Copyright (c) TODAYS_YEAR PROJECT_OWNER. All rights reserved.
 //
 
-#import "BViewController.h"
+#import "CPDViewController.h"
 #import <HandyFrame/UIView+LayoutMethods.h>
 
-@interface BViewController ()
+@interface CPDViewController ()
 
 @property (nonatomic, strong) UILabel *contentLabel;
 
 @end
 
-@implementation BViewController
+@implementation CPDViewController
 
 #pragma mark - life cycle
 - (instancetype)initWithContentText:(NSString *)contentText

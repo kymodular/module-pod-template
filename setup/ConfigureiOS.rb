@@ -64,6 +64,9 @@ module Pod
         end
       end
 
+
+      `mv ./Pod/Classes/ios/* ./Pod/Classes/`
+      
       Pod::ProjectManipulator.new({
         :configurator => @configurator,
         :xcodeproj_path => "templates/ios/Example/PROJECT.xcodeproj",
@@ -78,11 +81,9 @@ module Pod
       `touch Pod/Classes/ReplaceMe.m`
 
       `mv ./templates/ios/* ./`
-      `mv ./Pod/Classes/ios/* ./Pod/Classes/`
 
       # remove podspec for osx
       `rm ./NAME-osx.podspec`
-      `rm -rf ./Pod/Classes/swift`
     end
   end
 
