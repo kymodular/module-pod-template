@@ -11,6 +11,7 @@ module Pod
 
     def initialize(options)
       @xcodeproj_path = options.fetch(:xcodeproj_path)
+      @classes_path = options.fetch(:classes_path) 
       @configurator = options.fetch(:configurator)
       @platform = options.fetch(:platform)
       @remove_demo_target = options.fetch(:remove_demo_project)
@@ -25,6 +26,7 @@ module Pod
         "PROJECT" => @configurator.pod_name,
         "CPD" => @prefix
       }
+      rename_classes_files
       replace_internal_project_settings
 
       @project = Xcodeproj::Project.open(@xcodeproj_path)
@@ -87,6 +89,28 @@ RUBY
       File.dirname @xcodeproj_path
     end
 
+    def classes_folder
+      File.dirname @classes_path
+    end
+
+    def rename_classes_files
+      # change app file prefixes
+      ["Target_PROJECT.swift", "Target_PROJECT.h", "Target_PROJECT.m"].each do |file|
+        before = classes_folder + "/" +file
+        next unless File.exists? before
+
+        after = classes_folder + "/" + file.gsub("PROJECT", @configurator.pod_name)
+        File.rename before, after
+      end
+      ["CPDViewController.h", "CPDViewController.m"].each do |file|
+        before = classes_folder + "/" +file
+        next unless File.exists? before
+
+        after = classes_folder + "/" + file.gsub("CPD", prefix)
+        File.rename before, after
+      end  
+    end
+
     def rename_files
       # shared schemes have project specific names
       scheme_path = project_folder + "/PROJECT.xcodeproj/xcshareddata/xcschemes/"
@@ -124,7 +148,12 @@ RUBY
     end
 
     def replace_internal_project_settings
-      Dir.glob(project_folder + "/**/**/**/**").each do |name|
+      replace_internal_path(project_folder)
+      replace_internal_path(classes_folder)
+    end
+
+    def replace_internal_path(path)
+      Dir.glob(path + "/**/**/**/**").each do |name|
         next if Dir.exists? name
         text = File.read(name)
 
