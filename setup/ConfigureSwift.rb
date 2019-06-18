@@ -12,7 +12,9 @@ module Pod
     end
 
     def perform
-      keep_demo = configurator.ask_with_answers("Would you like to include a demo application with your library", ["Yes", "No"]).to_sym
+      # keep_demo = configurator.ask_with_answers("Would you like to include a demo application with your library", ["Yes", "No"]).to_sym
+      puts "Would you like to include a demo application with your library? yes"
+      keep_demo = :yes
 
       framework = configurator.ask_with_answers("Which testing frameworks will you use", ["Quick", "None"]).to_sym
       case framework
@@ -41,7 +43,7 @@ module Pod
       end
 
       `mv ./Pod/Classes/swift/* ./Pod/Classes/`
-      
+
       Pod::ProjectManipulator.new({
         :configurator => @configurator,
         :xcodeproj_path => "templates/swift/Example/PROJECT.xcodeproj",
