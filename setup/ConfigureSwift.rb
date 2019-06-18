@@ -66,6 +66,9 @@ module Pod
 
       # remove podspec for osx
       `rm ./NAME-osx.podspec`
+
+      `rm -rf Pod/Classes/swift`
+      `rm -rf Pod/Classes/ios`
     end
   end
 
