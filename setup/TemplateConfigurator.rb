@@ -72,7 +72,7 @@ module Pod
 
       # platform = self.ask_with_answers("What platform do you want to use?", ["iOS", "macOS"]).to_sym
       puts "platform use ios"
-      platform = :ios;
+      platform = :ios
       case platform
         when :macos
           ConfigureMacOSSwift.perform(configurator: self)
