@@ -7,7 +7,6 @@
 //
 
 #import "CPDViewController.h"
-#import <HandyFrame/UIView+LayoutMethods.h>
 
 @interface CPDViewController ()
 
@@ -38,7 +37,7 @@
 {
     [super viewWillLayoutSubviews];
     [self.contentLabel sizeToFit];
-    [self.contentLabel centerEqualToView:self.view];
+    self.contentLabel.center = self.view.center;
 }
 
 #pragma mark - getters and setters
